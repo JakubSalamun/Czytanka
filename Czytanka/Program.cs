@@ -70,7 +70,14 @@ namespace Czytanka
             {
                 case "1":
                     Console.WriteLine("IT");
-                   var documen1= File.ReadAllText(@"D:\Czytanka\IT.txt");
+                    var files =Directory.GetFiles("D:/Czytanka/IT/","*.txt",SearchOption.AllDirectories);
+                    foreach (var item in files)
+                    {
+                        Console.WriteLine(String.Join(Environment.NewLine,files));
+                    }
+                    Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
+                    var chapter = Console.ReadLine();
+                    var documen1= File.ReadAllText($"D:/Czytanka/IT/IT-{chapter}.txt");
                     Console.WriteLine(documen1);
                     CheckReadTome();
                     break;
@@ -101,7 +108,6 @@ namespace Czytanka
 
 
         }
-
 
         static void CheckReadTome()
         {
