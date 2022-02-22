@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Czytanka
 {
@@ -69,7 +70,9 @@ namespace Czytanka
             {
                 case "1":
                     Console.WriteLine("IT");
-
+                   var documen1= File.ReadAllText(@"D:\Czytanka\IT.txt");
+                    Console.WriteLine(documen1);
+                    CheckReadTome();
                     break;
 
 
@@ -96,6 +99,19 @@ namespace Czytanka
                     break;
             }
 
+
+        }
+
+
+        static void CheckReadTome()
+        {
+            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału)");
+            var chapter = Console.ReadLine();
+            var oldChapter = "{Rozdział x}";
+            var newChapter = oldChapter.Replace('x',Convert.ToChar(chapter));
+            var templat = File.ReadAllText(@"D:\Czytanka\IT.txt");
+            var document = templat.Replace(newChapter, "Przeczytałem");
+            File.WriteAllText($"D:/Czytanka/IT-{chapter}.txt", document);
 
         }
     }
