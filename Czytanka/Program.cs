@@ -71,15 +71,7 @@ namespace Czytanka
                 case "1":
                     Console.WriteLine("IT");
                     var helpString = "IT";
-                    var files =Directory.GetFiles("D:/Czytanka/IT/","*.txt",SearchOption.AllDirectories);
-                    foreach (var item in files)
-                    {
-                        Console.WriteLine(String.Join(Environment.NewLine,files));
-                    }
-                    Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
-                    var chapter = Console.ReadLine();
-                    var documen1= File.ReadAllText($"D:/Czytanka/IT/IT-{chapter}.txt");
-                    Console.WriteLine(documen1);
+                    BookTom(helpString);
                     CheckReadTome(helpString);
                     break;
 
@@ -90,15 +82,7 @@ namespace Czytanka
               
                     Console.WriteLine("Obecność");
                     var helpString2 = "Obecność";
-                    var files2 = Directory.GetFiles("D:/Czytanka/Obecność/", "*.txt", SearchOption.AllDirectories);
-                    foreach (var item in files2)
-                    {
-                        Console.WriteLine(String.Join(Environment.NewLine, files2));
-                    }
-                    Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
-                    var chapter2 = Console.ReadLine();
-                    var documen2 = File.ReadAllText($"D:/Czytanka/Obecność/Obecność-{chapter2}.txt");
-                    Console.WriteLine(documen2);
+                    BookTom(helpString2);
                     CheckReadTome(helpString2);
                     break;
 
@@ -108,15 +92,7 @@ namespace Czytanka
                 case "3":
                     Console.WriteLine("Egzorcysta");
                     var helpString3 = "Egzorcysta";
-                    var files3 = Directory.GetFiles("D:/Czytanka/Egzorcysta/", "*.txt", SearchOption.AllDirectories);
-                    foreach (var item in files3)
-                    {
-                        Console.WriteLine(String.Join(Environment.NewLine, files3));
-                    }
-                    Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
-                    var chapter3 = Console.ReadLine();
-                    var documen3 = File.ReadAllText($"D:/Czytanka/Egzorcysta/Egzorcysta-{chapter3}.txt");
-                    Console.WriteLine(documen3);
+                    BookTom(helpString3);
                     CheckReadTome(helpString3);
                     break;
 
@@ -143,6 +119,19 @@ namespace Czytanka
             var document = templat.Replace(newChapter, "Przeczytałem");
             File.WriteAllText($"D:/Czytanka/{book}-{chapter}.txt", document);
 
+        }
+
+        static void BookTom(string bookName)
+        {
+            var files = Directory.GetFiles($"D:/Czytanka/{bookName}/", "*.txt", SearchOption.AllDirectories);
+            foreach (var item in files)
+            {
+                Console.WriteLine(String.Join(Environment.NewLine, files));
+            }
+            Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
+            var chapter = Console.ReadLine();
+            var documen1 = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}-{chapter}.txt");
+            Console.WriteLine(documen1);
         }
     }
 }
