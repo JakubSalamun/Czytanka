@@ -72,6 +72,7 @@ namespace Czytanka
                     Console.WriteLine("IT");
                     var helpString = "IT";
                     BookTom(helpString);
+                    CheckReadBook(helpString);
                     CheckReadTome(helpString);
                     break;
 
@@ -109,15 +110,26 @@ namespace Czytanka
 
         }
 
-        static void CheckReadTome(string book)
+        static void CheckReadTome(string bookTom)
         {
             Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału)");
             var chapter = Console.ReadLine();
             var oldChapter = "{Rozdział x}";
             var newChapter = oldChapter.Replace('x',Convert.ToChar(chapter));
-            var templat = File.ReadAllText($"D:/Czytanka/{book}.txt");
+            var templat = File.ReadAllText($"D:/Czytanka/{bookTom}/{bookTom}.txt");
             var document = templat.Replace(newChapter, "Przeczytałem");
-            File.WriteAllText($"D:/Czytanka/{book}-{chapter}.txt", document);
+            File.WriteAllText($"D:/Czytanka/{bookTom}-{chapter}.txt", document);
+
+        }
+        static void CheckReadBook(string bookName)
+        {
+            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału)");
+            var chapter = Console.ReadLine();
+            var oldChapter = "{Rozdział x}";
+            var newChapter = oldChapter.Replace('x', Convert.ToChar(chapter));
+            var templat = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}.txt");
+            var document = templat.Replace(newChapter, "Przeczytałem");
+            File.WriteAllText($"D:/Czytanka/{bookName}/{bookName}.txt", document);
 
         }
 
@@ -128,9 +140,7 @@ namespace Czytanka
             {
                 Console.WriteLine(String.Join(Environment.NewLine, files));
             }
-            Console.WriteLine("Podaj rozdział gdzie skończyłaś/łeś czytać (gdy zaczynasz podaj wartość 1)");
-            var chapter = Console.ReadLine();
-            var documen1 = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}-{chapter}.txt");
+            var documen1 = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}.txt");
             Console.WriteLine(documen1);
         }
     }
