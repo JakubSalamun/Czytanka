@@ -39,6 +39,7 @@ namespace Czytanka
 
                 case "2":
                     Console.WriteLine("Przygody");
+                    ShowJourney();
                     break;
 
 
@@ -58,6 +59,57 @@ namespace Czytanka
             }
         }
 
+        static void ShowJourney()
+        {
+            Console.WriteLine("1-Indiana Jones 1");
+            Console.WriteLine("2-Indiana Jones 2");
+            Console.WriteLine("3-Indiana Jones 3");
+            Console.WriteLine("x-Wychodze");
+            string userInput = Console.ReadLine();
+
+            switch (userInput)
+            {
+                case "1":
+                    Console.WriteLine("Indiana Jones 1");
+                    var helpString = "Indiana Jones 1";
+                    BookTome(helpString);
+                    CheckReadBook(helpString);
+                    CheckReadTome(helpString);
+                    break;
+
+
+
+
+                case "2":
+
+                    Console.WriteLine("Indiana Jones 2");
+                    var helpString2 = "Indiana Jones 2";
+                    BookTome(helpString2);
+                    CheckReadBook(helpString2);
+                    CheckReadTome(helpString2);
+                    break;
+
+
+
+
+                case "3":
+                    Console.WriteLine("Indiana Jones 3");
+                    var helpString3 = "Indiana Jones 3";
+                    BookTome(helpString3);
+                    CheckReadBook(helpString3);
+                    CheckReadTome(helpString3);
+                    break;
+
+
+                case "x":
+                    ShowMenu();
+                    break;
+
+
+                default:
+                    break;
+            }
+        }
         static void ShowHorros()
         {
             Console.WriteLine("1-IT");
@@ -84,6 +136,7 @@ namespace Czytanka
                     Console.WriteLine("Obecność");
                     var helpString2 = "Obecność";
                     BookTome(helpString2);
+                    CheckReadBook(helpString2);
                     CheckReadTome(helpString2);
                     break;
 
@@ -94,6 +147,7 @@ namespace Czytanka
                     Console.WriteLine("Egzorcysta");
                     var helpString3 = "Egzorcysta";
                     BookTome(helpString3);
+                    CheckReadBook(helpString3);
                     CheckReadTome(helpString3);
                     break;
 
@@ -112,27 +166,43 @@ namespace Czytanka
 
         static void CheckReadTome(string bookTom)
         {
-            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału)");
+            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału utworzony zostanie w kopii)/(podaj 'nic' byt wyjść");
             var chapter = Console.ReadLine();
-            var oldChapter = "{Rozdział x}";
-            var newChapter = oldChapter.Replace('x',Convert.ToChar(chapter));
-            var templat = File.ReadAllText($"D:/Czytanka/{bookTom}/{bookTom}.txt");
-            var document = templat.Replace(newChapter, "Przeczytałem");
-            File.WriteAllText($"D:/Czytanka/{bookTom}-{chapter}.txt", document);
+            if (chapter=="nic")
+            {
+                Console.WriteLine("Pamiętaj do mnie wrócić ;)");
+            }
+            else
+            {
+                var oldChapter = "{Rozdział x}";
+                var newChapter = oldChapter.Replace('x', Convert.ToChar(chapter));
+                var templat = File.ReadAllText($"D:/Czytanka/{bookTom}/{bookTom}.txt");
+                var document = templat.Replace(newChapter, "Przeczytałem");
+                File.WriteAllText($"D:/Czytanka/{bookTom}-{chapter}.txt", document);
+            }
+     
 
         }
         static void CheckReadBook(string bookName)
         {
-            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału)");
+            Console.WriteLine("Co już przeczytałeś? (Podaj numer rozdziału w orginale)/(podaj 'nic' byt wyjść");
             var chapter = Console.ReadLine();
-            var oldChapter = "{Rozdział x}";
-            var newChapter = oldChapter.Replace('x', Convert.ToChar(chapter));
-            var templat = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}.txt");
-            var document = templat.Replace(newChapter, "Przeczytałem");
-            File.WriteAllText($"D:/Czytanka/{bookName}/{bookName}.txt", document);
+            if (chapter == "nic")
+            {
+                Console.WriteLine("Pamiętaj do mnie wrócić ;)");
+            }
+            else
+            {
+                var oldChapter = "{Rozdział x}";
+                var newChapter = oldChapter.Replace('x', Convert.ToChar(chapter));
+                var templat = File.ReadAllText($"D:/Czytanka/{bookName}/{bookName}.txt");
+                var document = templat.Replace(newChapter, "Przeczytałem");
+                File.WriteAllText($"D:/Czytanka/{bookName}/{bookName}.txt", document);
+            }
+
+
 
         }
-
         static void BookTome(string bookName)
         {
             var files = Directory.GetFiles($"D:/Czytanka/{bookName}/", "*.txt", SearchOption.AllDirectories);
