@@ -71,7 +71,7 @@ namespace Czytanka
                 case "1":
                     Console.WriteLine("IT");
                     var helpString = "IT";
-                    BookTom(helpString);
+                    BookTome(helpString);
                     CheckReadBook(helpString);
                     CheckReadTome(helpString);
                     break;
@@ -83,7 +83,7 @@ namespace Czytanka
               
                     Console.WriteLine("Obecność");
                     var helpString2 = "Obecność";
-                    BookTom(helpString2);
+                    BookTome(helpString2);
                     CheckReadTome(helpString2);
                     break;
 
@@ -93,7 +93,7 @@ namespace Czytanka
                 case "3":
                     Console.WriteLine("Egzorcysta");
                     var helpString3 = "Egzorcysta";
-                    BookTom(helpString3);
+                    BookTome(helpString3);
                     CheckReadTome(helpString3);
                     break;
 
@@ -133,7 +133,7 @@ namespace Czytanka
 
         }
 
-        static void BookTom(string bookName)
+        static void BookTome(string bookName)
         {
             var files = Directory.GetFiles($"D:/Czytanka/{bookName}/", "*.txt", SearchOption.AllDirectories);
             foreach (var item in files)
